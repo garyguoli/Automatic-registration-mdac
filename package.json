@@ -1,0 +1,33 @@
+{
+  "name": "automatic-registration-mdac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_OPTIONS=\"--loader ts-node/esm\" node index.ts",
+    "dev": "node run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garyguoli/Automatic-registration-mdac.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garyguoli/Automatic-registration-mdac/issues"
+  },
+  "homepage": "https://github.com/garyguoli/Automatic-registration-mdac#readme",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "playwright": "^1.51.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.13.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
