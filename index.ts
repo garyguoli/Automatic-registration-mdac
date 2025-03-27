@@ -65,7 +65,6 @@ async function fillRegistrationForm() {
         await page.getByRole("cell", { name: "March" }).click();
         await page.getByRole("cell", { name: "2025" }).click();
         // 导航到2027年
-        await page.getByRole("cell", { name: "-2029" }).click();
         await page.getByText(userData.passportExpiry.year).click();
         await page.getByText(userData.passportExpiry.month, { exact: true }).click();
         await page.getByRole("cell", { name: userData.passportExpiry.day }).click();
