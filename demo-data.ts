@@ -26,7 +26,6 @@ export const userData: UserData = {
         stay: "",
         address: "",
         state: "",
-        city: "",
         postcode: ""
     }
 };

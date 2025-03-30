@@ -25,7 +25,7 @@ cd Automatic-registration-mdac
 
 2. Install dependencies:
 ```bash
-npm install
+npm install, yarn add, pnpm i
 ```
 
 ## Configuration
@@ -33,34 +33,40 @@ npm install
 Configure your personal information in the `data.ts` file:
 
 ```typescript
-export const userData = {
-  name: "YOUR NAME",
-  passportNo: "PASSPORT NUMBER",
-  nationality: "NATIONALITY CODE", // e.g., CHN for China
-  dateOfBirth: {
-    year: "BIRTH YEAR",
-    month: "BIRTH MONTH",
-    day: "BIRTH DAY"
-  },
-  gender: "GENDER CODE", // 1 for Male
-  passportExpiry: {
-    year: "PASSPORT EXPIRY YEAR",
-    month: "PASSPORT EXPIRY MONTH",
-    day: "PASSPORT EXPIRY DAY"
-  },
-  email: "EMAIL ADDRESS",
-  mobile: "PHONE NUMBER",
-  vesselNumber: "FLIGHT NUMBER",
-  travelMode: "TRAVEL MODE CODE", // 2 for Air Travel
-  embarkation: "EMBARKATION CODE", // e.g., SGP for Singapore
-  accommodation: {
-    stay: "ACCOMMODATION TYPE CODE",
-    address: "DETAILED ADDRESS",
-    state: "STATE CODE",
-    city: "CITY CODE",
-    postcode: "POSTAL CODE"
-  }
-};
+export interface UserData {
+    name: string;
+    passportNo: string;
+    nationality: 'CHN' | 'SGP' | 'USA' | 'MYS' | 'IND' | 'IDN' | 'PHL' | 'THA' | 'VNM' | 'AUS' | 'GBR' | 'CAN' | 'DEU' | 'FRA' | 'JPN' | 'KOR' | 'Other';
+    dateOfBirth: {
+        year: string;
+        month: 'Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun' | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec';
+        day: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10'
+        | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '20'
+        | '21' | '22' | '23' | '24' | '25' | '26' | '27' | '28' | '29' | '30'
+        | '31';
+    };
+    gender: '1' | '2'; // 1 for Male, 2 for Female
+    passportExpiry: {
+        year: string;
+        month: 'Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun' | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec';
+        day: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10'
+        | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '20'
+        | '21' | '22' | '23' | '24' | '25' | '26' | '27' | '28' | '29' | '30'
+        | '31';
+    };
+    email: string;
+    mobile: string;
+    vesselNumber: string;
+    travelMode: '1' | '2' | '3'; //LAND for 2， SEA for 3, AIR for 1
+    embarkation: 'CHN' | 'SGP' | 'USA' | 'MYS' | 'IND' | 'IDN' | 'PHL' | 'THA' | 'VNM' | 'AUS' | 'GBR' | 'CAN' | 'DEU' | 'FRA' | 'JPN' | 'KOR' | 'Other';
+    accommodation: {
+        stay: '1' | '2' | '99'; // 99 for other , 1 for hotel, 2 for residential
+        address: string;
+        state: '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09' | '10' | '11' | '12' | '13' | '14' | '15' | '16';//JB is 01, 
+        // city: string;//JB is 0100
+        postcode: string; //  (must be five digits)
+    };
+}
 ```
 
 ## Usage

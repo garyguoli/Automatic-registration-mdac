@@ -76,8 +76,7 @@ async function fillRegistrationForm() {
 
         // 填写旅行信息
         await page.locator("#arrDt").click();
-
-        await page.getByRole("cell", { name: arrivalDate }).nth(1).click();
+        await page.getByRole("cell", { name: arrivalDate }).click();
         await page.locator("#depDt").click();
         await page.getByRole("cell", { name: departureDate }).click();
         await page.locator("#vesselNm").fill(userData.vesselNumber);
@@ -88,7 +87,8 @@ async function fillRegistrationForm() {
         await page.locator("#accommodationStay").selectOption(userData.accommodation.stay);
         await page.locator("#accommodationAddress1").fill(userData.accommodation.address);
         await page.locator("#accommodationState").selectOption(userData.accommodation.state);
-        await page.locator("#accommodationCity").selectOption(userData.accommodation.city);
+        await page.locator("#accommodationState").selectOption(`${userData.accommodation.state}00`);
+        // await page.locator("#accommodationCity").selectOption(userData.accommodation.city);
         await page.locator("#accommodationPostcode").fill(userData.accommodation.postcode);
 
         console.log("表单已自动填写完成，请手动完成后续步骤或提交表单。");
