@@ -20,6 +20,7 @@ export interface UserData {
         | '31';
     };
     email: string;
+    RegionCode: string;
     mobile: string;
     vesselNumber: string;
     travelMode: '1' | '2' | '3'; //LAND for 2， SEA for 3, AIR for 1
