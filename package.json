@@ -7,8 +7,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "npm run build && npm start"
+    "dev": "ts-node --esm index.ts",
+    "dev:watch": "nodemon --exec \"ts-node --esm\" index.ts",
+    "start": "tsx index.ts",
+    "start:prod": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,9 @@
     "@playwright/test": "^1.51.1",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^22.13.14",
+    "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.2"
   }
 }

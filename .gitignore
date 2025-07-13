@@ -1,12 +1,30 @@
-# 忽略整个目录
+# Dependencies
 node_modules/
 
-# 忽略所有 `.log` 文件
-*.log
-
-data.ts
-UserData.js
-
+# Build output
 dist/
 
-/data
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test results
+test-results/
+/playwright-report/
+/playwright/.cache/
+
+# User data files (keep directory structure but hide content)
+data/*
+!data/.gitkeep
+!data/README.md
