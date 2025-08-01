@@ -5,7 +5,8 @@ import { readdir } from 'fs/promises';
 import { UserData } from './UserData.js';
 
 const today = dayjs();
-const thisMonth = today.format("MMMM");
+const thisMonth = today.format("MMMM")
+const lastMonth = today.subtract(1, 'month').format("MMMM");
 let arrivalDate = '';
 let departureDate = '';
 let userData: UserData;
@@ -190,7 +191,18 @@ async function fillRegistrationForm() {
 
     await page.waitForTimeout(3000);
     await page.locator("#dob").click();
-    await page.getByRole("cell", { name: thisMonth }).click();
+
+    const thisMonthCell = page.getByRole("cell", { name: thisMonth });
+    const lastMonthCell = page.getByRole("cell", { name: lastMonth });
+
+    // 先找 thisMonth，有就点击；没有就点击 lastMonth
+    if (await thisMonthCell.count() > 0) {
+        await thisMonthCell.click();
+        console.log(`Clicked: ${thisMonth}`);
+    } else if (await lastMonthCell.count() > 0) {
+        await lastMonthCell.click();
+        console.log(`Clicked: ${lastMonth}`);
+    }
     await page.getByRole("cell", { name: dayjs().year().toString() }).click();
     // for (let i = 0; i < 4; i++) await page.getByRole("cell", { name: "«" }).click();
     // 导航到用户的出生年份
