@@ -4,6 +4,8 @@ import inquirer from 'inquirer';
 import { readdir } from 'fs/promises';
 import { UserData } from './UserData.js';
 
+
+
 const today = dayjs();
 const thisMonth = today.format("MMMM")
 const lastMonth = today.subtract(1, 'month').format("MMMM");
@@ -23,7 +25,7 @@ async function askFileSelection(): Promise<FileAnswers> {
     try {
         const files = await readdir('./data');
         const tsFiles = files.filter(file => file.endsWith('.ts'));
-        
+
         if (tsFiles.length === 0) {
             throw new Error('No .ts files found in data directory');
         }
@@ -147,7 +149,7 @@ async function main() {
 async function navigateToYear(page: Page, targetYear: string, direction: 'left' | 'right', maxClicks: number = 20): Promise<boolean> {
     let yearFound = false;
     const arrowSymbol = direction === 'left' ? '«' : '»';
-    
+
     for (let i = 0; i < maxClicks; i++) {
         // 检查是否找到了目标年份
         try {
@@ -158,17 +160,25 @@ async function navigateToYear(page: Page, targetYear: string, direction: 'left' 
             await page.getByRole("cell", { name: arrowSymbol }).click({ timeout: 800 });
         }
     }
-    
+
     if (!yearFound) {
         console.error(`Could not find year ${targetYear} after ${maxClicks} attempts`);
     }
-    
+
     return yearFound;
 }
 
 async function fillRegistrationForm() {
-    const browser = await chromium.launch({ headless: false, slowMo: 100 });
-    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const browser = await chromium.launch({
+        headless: false,
+        args: ['--disable-blink-features=AutomationControlled']
+    });
+
+    const context = await browser.newContext({
+        userAgent: 'Mozilla/5.0 ... Chrome/120',
+        locale: 'en-US',
+        timezoneId: 'Asia/Singapore'
+    });
     const page = await context.newPage();
 
     console.log("Starting automatic Malaysia Digital Arrival Card filling...");
@@ -215,7 +225,7 @@ async function fillRegistrationForm() {
     await page.locator("#passExpDte").click();
     await page.getByRole("cell", { name: thisMonth }).click();
     await page.getByRole("cell", { name: dayjs().year().toString() }).click();
-    
+
     // 导航到护照到期年份
     await navigateToYear(page, userData.passportExpiry.year, 'right');
     await page.getByText(userData.passportExpiry.month, { exact: true }).click();
